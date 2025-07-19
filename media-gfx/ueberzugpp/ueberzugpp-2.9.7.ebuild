@@ -14,7 +14,7 @@ SRC_URI="
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="X dbus opencv opengl wayland xcb-errors"
 REQUIRED_USE="xcb-errors? ( X )"
 
@@ -54,9 +54,11 @@ BDEPEND="
 "
 
 src_configure() {
-	if use X && [[ $(tc-get-cxx-stdlib) == libc++ ]]; then
-		# X support makes use of C++20's std::jthread which is currently
-		# marked experimental (at least) in <=libcxx-18
+	if use X && tc-is-clang &&
+		[[ $(tc-get-cxx-stdlib) == libc++ && $(clang-major-version) -lt 20 ]]
+	then
+		# X support makes use of C++20's std::jthread which works but
+		# is currently marked experimental in <libcxx-20
 		append-cxxflags $(test-flags-CXX -fexperimental-library)
 	fi
 

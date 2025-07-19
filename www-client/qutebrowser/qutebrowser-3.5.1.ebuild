@@ -18,7 +18,7 @@ else
 		verify-sig? ( https://github.com/qutebrowser/qutebrowser/releases/download/v${PV}/${P}.tar.gz.asc )
 	"
 	VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/qutebrowser.gpg
-	KEYWORDS="~amd64 ~arm64"
+	KEYWORDS="amd64 ~arm64"
 fi
 
 DESCRIPTION="Keyboard-driven, vim-like browser based on Python and Qt"
@@ -51,13 +51,7 @@ BDEPEND="
 			dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 			dev-python/cheroot[${PYTHON_USEDEP}]
 			dev-python/flask[${PYTHON_USEDEP}]
-			dev-python/hypothesis[${PYTHON_USEDEP}]
 			dev-python/pillow[${PYTHON_USEDEP}]
-			dev-python/pytest-bdd[${PYTHON_USEDEP}]
-			dev-python/pytest-mock[${PYTHON_USEDEP}]
-			dev-python/pytest-qt[${PYTHON_USEDEP}]
-			dev-python/pytest-rerunfailures[${PYTHON_USEDEP}]
-			dev-python/pytest-xvfb[${PYTHON_USEDEP}]
 			dev-python/tldextract[${PYTHON_USEDEP}]
 		)
 	')
@@ -69,6 +63,7 @@ else
 	BDEPEND+=" verify-sig? ( sec-keys/openpgp-keys-qutebrowser )"
 fi
 
+EPYTEST_PLUGINS=( hypothesis pytest-{bdd,mock,qt,rerunfailures,xvfb} )
 distutils_enable_tests pytest
 
 src_prepare() {

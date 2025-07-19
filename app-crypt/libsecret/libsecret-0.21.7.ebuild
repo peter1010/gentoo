@@ -12,7 +12,7 @@ HOMEPAGE="https://gnome.pages.gitlab.gnome.org/libsecret"
 LICENSE="LGPL-2.1+ test? ( || ( GPL-2+ Apache-2.0 ) )"
 SLOT="0"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv sparc ~x86"
 IUSE="+crypt +gcrypt gnutls gtk-doc +introspection pam test test-rust tpm +vala"
 
 RESTRICT="!test? ( test )"
@@ -58,6 +58,11 @@ BDEPEND="
 	)
 	vala? ( $(vala_depend) )
 "
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.21.7-optional-tests.patch
+	"${FILESDIR}"/${PN}-0.21.7-optional-vala-tests.patch
+)
 
 dbus_run() {
 	(
@@ -144,6 +149,7 @@ multilib_src_configure() {
 		-Dbash_completion=enabled
 		$(meson_native_use_bool tpm tpm2)
 		$(meson_native_use_bool pam)
+		$(meson_feature test test_setup)
 	)
 
 	if use crypt ; then

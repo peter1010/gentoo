@@ -85,7 +85,7 @@ LICENSE="|| ( LGPL-3 MPL-1.1 )"
 SLOT="0"
 
 [[ ${MY_PV} == *9999* ]] || \
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86 ~amd64-linux"
+KEYWORDS="amd64 ~arm arm64 ppc64 ~riscv ~x86 ~amd64-linux"
 
 # Extensions that need extra work:
 LO_EXTS="nlpsolver scripting-beanshell scripting-javascript wiki-publisher"
@@ -233,6 +233,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 #        as dmake execute tests right away
 #        tests apparently also need google-carlito-fonts (not packaged)
 DEPEND="${COMMON_DEPEND}
+	>=app-text/poppler-25.02.0
 	>=dev-libs/libatomic_ops-7.2d
 	dev-perl/Archive-Zip
 	>=dev-util/cppunit-1.14.0

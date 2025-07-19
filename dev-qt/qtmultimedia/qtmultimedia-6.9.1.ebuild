@@ -9,7 +9,7 @@ inherit flag-o-matic qt6-build
 DESCRIPTION="Multimedia (audio, video, radio, camera) library for the Qt6 framework"
 
 if [[ ${QT6_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86"
+	KEYWORDS="amd64 arm arm64 ~hppa ~loong ppc ppc64 ~riscv x86"
 fi
 
 IUSE="
@@ -95,6 +95,7 @@ CMAKE_SKIP_TESTS=(
 PATCHES=(
 	"${FILESDIR}"/${PN}-6.7.3-eigen-ppc-no-vsx.patch
 	"${FILESDIR}"/${PN}-6.8.1-qversionnumber.patch
+	"${FILESDIR}"/${PN}-6.9.1-ffmpeg7.2.patch
 )
 
 src_configure() {

@@ -67,7 +67,7 @@ RDEPEND=">=app-emacs/emacs-common-1.11[games?,gui?]
 				>=dev-libs/m17n-lib-1.5.1
 			)
 		)
-		gtk? ( x11-libs/gtk+:3 )
+		gtk? ( x11-libs/gtk+:3[X] )
 		!gtk? (
 			motif? (
 				>=x11-libs/motif-2.3:0
@@ -124,6 +124,8 @@ src_configure() {
 	# We want floating-point arithmetic to be correct #933380
 	replace-flags -Ofast -O2
 	append-flags -fno-fast-math -ffp-contract=off
+
+	export ac_cv_header_valgrind_valgrind_h=$(usex valgrind)
 
 	local myconf=(
 		--program-suffix="-${EMACS_SUFFIX}"
@@ -243,8 +245,6 @@ src_configure() {
 }
 
 src_compile() {
-	export ac_cv_header_valgrind_valgrind_h=$(usex valgrind)
-
 	# Disable sandbox when dumping. For the unbelievers, see bug #131505
 	emake RUN_TEMACS="SANDBOX_ON=0 LD_PRELOAD= env ./temacs"
 }

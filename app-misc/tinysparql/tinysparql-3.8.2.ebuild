@@ -11,7 +11,7 @@ HOMEPAGE="https://gnome.pages.gitlab.gnome.org/tinysparql"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="3/0" # libtracker-sparql-3.0 soname version
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc x86"
 IUSE="gtk-doc +localsearch stemmer systemd test vala zeroconf"
 RESTRICT="!test? ( test )"
 
@@ -97,7 +97,7 @@ src_install() {
 
 	if use gtk-doc; then
 		mkdir -p "${ED}"/usr/share/gtk-doc/html/ || die
-		mv "${ED}"/usr/share/doc/Tracker-3.0 "${ED}"/usr/share/gtk-doc/html/ || die
+		mv "${ED}"/usr/share/doc/Tsparql-3.0 "${ED}"/usr/share/gtk-doc/html/ || die
 	fi
 }
 

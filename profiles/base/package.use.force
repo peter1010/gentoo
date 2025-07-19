@@ -1,6 +1,10 @@
 # Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# Andreas Sturmlechner <asturm@gentoo.org> (2025-06-22)
+# This is currently more footgun than real option. Bug #958638
+<kde-plasma/kwin-6.5.0 X
+
 # Ionen Wolkens <ionen@gentoo.org> (2025-06-17)
 # Build system currently does not allow static libs to be optional, and
 # deleting (as we do now) leaves both the cmake export and fltk-config
@@ -74,6 +78,8 @@ llvm-runtimes/libcxxabi clang
 #    echo "dev-lang/rust:${slot} llvm_slot_${_RUST_LLVM_MAP[${slot}]}"
 #    echo "dev-lang/rust-bin:${slot} llvm_slot_${_RUST_LLVM_MAP[${slot}]}"
 # done
+dev-lang/rust:1.88.0 llvm_slot_20
+dev-lang/rust-bin:1.88.0 llvm_slot_20
 dev-lang/rust:1.87.0 llvm_slot_20
 dev-lang/rust-bin:1.87.0 llvm_slot_20
 dev-lang/rust:1.86.0 llvm_slot_19
@@ -204,6 +210,7 @@ dev-java/openjdk:21 system-bootstrap
 >=llvm-core/clang-13.0.1_rc llvm_targets_X86 llvm_targets_XCore
 >=llvm-core/clang-14 llvm_targets_VE
 >=llvm-core/clang-16 llvm_targets_LoongArch
+>=llvm-core/clang-20 llvm_targets_SPIRV
 >=llvm-core/llvm-13.0.1_rc llvm_targets_AArch64 llvm_targets_AMDGPU
 >=llvm-core/llvm-13.0.1_rc llvm_targets_ARM llvm_targets_AVR llvm_targets_BPF
 >=llvm-core/llvm-13.0.1_rc llvm_targets_Hexagon llvm_targets_Lanai
@@ -214,6 +221,7 @@ dev-java/openjdk:21 system-bootstrap
 >=llvm-core/llvm-13.0.1_rc llvm_targets_X86 llvm_targets_XCore
 >=llvm-core/llvm-14 llvm_targets_VE
 >=llvm-core/llvm-16 llvm_targets_LoongArch
+>=llvm-core/llvm-20 llvm_targets_SPIRV
 
 # Andreas K. Hüttel <dilfridge@gentoo.org> (2021-07-14)
 # Upstream plans to drop libcrypt.so.1/crypt.h from glibc

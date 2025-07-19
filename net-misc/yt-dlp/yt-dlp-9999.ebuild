@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=hatchling
-PYTHON_COMPAT=( pypy3_11 python3_{11..13} )
+PYTHON_COMPAT=( pypy3_11 python3_{11..14} )
 inherit distutils-r1 git-r3 optfeature shell-completion wrapper
 
 DESCRIPTION="youtube-dl fork with additional features and fixes"
@@ -23,6 +23,7 @@ BDEPEND="
 	test? ( media-video/ffmpeg[webp] )
 "
 
+EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
 
 python_compile() {

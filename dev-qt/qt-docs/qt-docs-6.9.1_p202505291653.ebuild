@@ -10,7 +10,7 @@ HOMEPAGE="https://doc.qt.io/"
 
 LICENSE="FDL-1.3"
 SLOT="6"
-KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86"
+KEYWORDS="amd64 arm arm64 ~hppa ~loong ppc ppc64 ~riscv x86"
 IUSE="+examples +html +qch"
 REQUIRED_USE="|| ( examples html qch )"
 
@@ -64,7 +64,7 @@ qt6_docs_generate_metadata() {
 			qtquick qtquickcontrols qtquickdialogs
 		"
 		%doc^qtdoc
-		-graphs/qtgraphs
+		+graphs/qtgraphs
 		-grpc/qtgrpc="qtgrpc qtprotobuf"
 		+httpserver/qthttpserver
 		+imageformats/qtimageformats:

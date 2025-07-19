@@ -110,7 +110,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
 	app-crypt/argon2:=
-	app-crypt/gpgme:=[cxx]
+	dev-cpp/gpgmepp:=
 	app-text/hunspell:=
 	>=app-text/libabw-0.1.0
 	>=app-text/libebook-0.1
@@ -198,7 +198,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		dev-libs/glib:2
 		gnome-base/dconf
 		media-libs/mesa[egl(+)]
-		gui-libs/gtk[X]
+		gui-libs/gtk[wayland,X]
 		x11-libs/pango
 	)
 	kde? (

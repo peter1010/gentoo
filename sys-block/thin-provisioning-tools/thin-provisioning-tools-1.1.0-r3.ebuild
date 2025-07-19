@@ -148,7 +148,7 @@ declare -A GIT_CRATES=(
 	[rio]='https://github.com/jthornber/rio;2979a720f671e836302c01546f9cc9f7988610c8;rio-%commit%'
 )
 
-LLVM_COMPAT=( {17..19} )
+LLVM_COMPAT=( {17..20} )
 
 inherit cargo llvm-r1
 
@@ -163,7 +163,7 @@ else
 		https://github.com/jthornber/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 		${CARGO_CRATE_URIS}
 	"
-	KEYWORDS="amd64 arm arm64 ~loong ppc64 ~riscv ~sparc x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="amd64 arm arm64 ~loong ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux"
 fi
 
 LICENSE="GPL-3"

@@ -36,7 +36,7 @@ esac
 if [[ -z ${_KERNEL_BUILD_ECLASS} ]]; then
 _KERNEL_BUILD_ECLASS=1
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{11..14} )
 if [[ ${KERNEL_IUSE_MODULES_SIGN} ]]; then
 	inherit secureboot
 fi
@@ -263,6 +263,9 @@ kernel-build_src_configure() {
 	# on the name of the output image. Set this variable to track this setting.
 	if grep -q "CONFIG_EFI_ZBOOT=y" .config; then
 		KERNEL_EFI_ZBOOT=1
+	elif { use arm64 || use riscv || use loong ;} &&
+		[[ ${KERNEL_IUSE_GENERIC_UKI} ]] && use generic-uki; then
+			die "USE=generic-uki requires enabling CONFIG_EFI_ZBOOT"
 	fi
 
 	mkdir -p "${WORKDIR}"/modprep || die

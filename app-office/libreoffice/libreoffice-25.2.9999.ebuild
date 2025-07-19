@@ -110,7 +110,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
 	app-crypt/argon2:=
-	app-crypt/gpgme:=[cxx]
+	dev-cpp/gpgmepp:=
 	app-text/hunspell:=
 	>=app-text/libabw-0.1.0
 	>=app-text/libebook-0.1
@@ -198,7 +198,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		dev-libs/glib:2
 		gnome-base/dconf
 		media-libs/mesa[egl(+)]
-		x11-libs/gtk+:3[X]
+		x11-libs/gtk+:3[wayland,X]
 		x11-libs/pango
 	)
 	gtk4? (
@@ -206,7 +206,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		dev-libs/glib:2
 		gnome-base/dconf
 		media-libs/mesa[egl(+)]
-		gui-libs/gtk:4[X]
+		gui-libs/gtk:4[wayland,X]
 		x11-libs/pango
 	)
 	kde? (

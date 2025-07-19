@@ -13,8 +13,8 @@ if [[ ${PV} == 99999999* ]]; then
 	EGIT_REPO_URI="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/${PN}.git"
 else
 	if [[ -n "${MY_COMMIT}" ]]; then
-		SRC_URI="https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/${MY_COMMIT}.tar.gz -> ${P}.tar.gz"
-		S="${WORKDIR}/${MY_COMMIT}"
+		SRC_URI="https://gitlab.com/kernel-firmware/linux-firmware/-/archive/${MY_COMMIT}/linux-firmware-${MY_COMMIT}.tar.bz2 -> ${P}.tar.bz2"
+		S="${WORKDIR}/${PN}-${MY_COMMIT}"
 	else
 		SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/${P}.tar.xz"
 	fi
@@ -369,6 +369,11 @@ pkg_preinst() {
 	# Fix 'symlink is blocked by a directory' Bug #871315
 	if has_version "<${CATEGORY}/${PN}-20220913-r2" ; then
 		rm -rf "${EROOT}"/lib/firmware/qcom/LENOVO/21BX
+	fi
+
+	# Fix 'symlink is blocked by a directory' https://bugs.gentoo.org/958268#c3
+	if has_version "<${CATEGORY}/${PN}-20250613" ; then
+		rm -rf "${EROOT}"/lib/firmware/nvidia/{ad103,ad104,ad106,ad107}
 	fi
 
 	# Make sure /boot is available if needed.

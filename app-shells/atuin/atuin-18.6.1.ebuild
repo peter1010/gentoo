@@ -18,7 +18,7 @@ LICENSE="MIT"
 # - openssl for ring crate
 LICENSE+=" Apache-2.0 BSD Boost-1.0 ISC MIT MPL-2.0 Unicode-DFS-2016 openssl"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~riscv"
+KEYWORDS="amd64 ~arm64 ~riscv"
 IUSE="+client +daemon server test +sync"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="
@@ -110,6 +110,7 @@ src_test() {
 }
 
 src_install() {
+	readme.gentoo_create_doc
 	dobin "${ATUIN_BIN}"
 
 	if use server; then
@@ -132,8 +133,6 @@ src_install() {
 
 	insinto "/usr/share/${PN}"
 	doins -r shell-init
-
-	readme.gentoo_create_doc
 }
 
 pkg_postinst() {

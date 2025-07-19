@@ -3,8 +3,8 @@
 
 EAPI=8
 
-# las Xiph's libparanoia was 10.2. Forks that superseeded it note that
-# by declaring their version as 10.2+${PV}
+# Xiph's last (cd/lib)paranoia was 10.2. This fork is versioned accordingly
+# by declaring its version as 10.2+${PV}.
 MY_P=${PN}-10.2+${PV/_p/+}
 
 inherit autotools multilib-minimal
@@ -19,7 +19,7 @@ S="${WORKDIR}/${MY_P}"
 # clause "or later" so we use LGPL-2.1 without +
 LICENSE="GPL-3+ GPL-2+ LGPL-2.1"
 SLOT="0/2" # soname version
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos"
 IUSE="+cxx static-libs test"
 RESTRICT="!test? ( test )"
 

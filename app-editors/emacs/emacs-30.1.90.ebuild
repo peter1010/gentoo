@@ -67,7 +67,7 @@ X_DEPEND="x11-libs/libICE
 			>=dev-libs/m17n-lib-1.5.1
 		)
 	)
-	gtk? ( x11-libs/gtk+:3 )
+	gtk? ( x11-libs/gtk+:3[X] )
 	!gtk? (
 		motif? (
 			>=x11-libs/motif-2.3:0
@@ -225,6 +225,9 @@ src_configure() {
 	# We want floating-point arithmetic to be correct #933380
 	replace-flags -Ofast -O2
 	append-flags -fno-fast-math -ffp-contract=off
+
+	export ac_cv_header_valgrind_valgrind_h=$(usex valgrind)
+	append-cppflags -DUSE_VALGRIND=$(usex valgrind)
 
 	# Prevents e.g. tests interfering with running Emacs.
 	unset EMACS_SOCKET_NAME
@@ -406,9 +409,6 @@ src_configure() {
 }
 
 src_compile() {
-	export ac_cv_header_valgrind_valgrind_h=$(usex valgrind)
-	append-cppflags -DUSE_VALGRIND=$(usex valgrind)
-
 	if tc-is-cross-compiler; then
 		# Build native tools for compiling lisp etc.
 		emake -C "${S}-build" src

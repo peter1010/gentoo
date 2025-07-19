@@ -73,14 +73,12 @@ REQUIRED_USE="
 	)
 	curl_quic_openssl? (
 		curl_ssl_openssl
-		quic
 		!gnutls
 		!mbedtls
 		!rustls
 	)
 	curl_quic_ngtcp2? (
 		curl_ssl_gnutls
-		quic
 		!mbedtls
 		!openssl
 		!rustls
@@ -227,10 +225,9 @@ _get_curl_tls_configure_opts() {
 		die "Please file a bug, hit impossible condition w/ USE=ssl handling."
 	fi
 
-	# Explicitly Disable unimplemented b
+	# Explicitly Disable unimplemented backends
 	tls_opts+=(
 		--without-amissl
-		--without-bearssl
 		--without-wolfssl
 	)
 
@@ -248,6 +245,16 @@ multilib_src_configure() {
 		local -a tls_backend_opts
 		readarray -t tls_backend_opts < <(_get_curl_tls_configure_opts)
 		myconf+=("${tls_backend_opts[@]}")
+		if use quic; then
+			myconf+=(
+				$(use_with curl_quic_ngtcp2 ngtcp2)
+				$(use_with curl_quic_openssl openssl-quic)
+			)
+		else
+			# Without a REQUIRED_USE to ensure that QUIC was requested when at least one default backend is
+			# enabled we need ensure that we don't try to build QUIC support
+			myconf+=( --without-ngtcp2 --without-openssl-quic )
+		fi
 	else
 		myconf+=( --without-ssl )
 		einfo "SSL disabled"
@@ -284,8 +291,6 @@ multilib_src_configure() {
 		$(use_enable httpsrr)
 		$(use_with http2 nghttp2)
 		$(use_with http3 nghttp3)
-		$(use_with curl_quic_ngtcp2 ngtcp2)
-		$(use_with curl_quic_openssl openssl-quic)
 	)
 
 	# --enable/disable options
@@ -334,7 +339,6 @@ multilib_src_configure() {
 		--without-msh3
 		--without-quiche
 		--without-schannel
-		--without-secure-transport
 		--without-winidn
 		--with-zlib
 		--with-zsh-functions-dir="${EPREFIX}"/usr/share/zsh/site-functions
